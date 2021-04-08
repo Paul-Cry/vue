@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Карточки</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+    <div class="container py-5">
+        <h2 class="mb-5 text-center">Карточки</h2>
+
+        <div class="row">
+            <!-- Задача не выполнена -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card mb-3 text-dark bg-light">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <span class="badge bg-primary mb-3">Категория</span>
+                            <input type="checkbox" class="form-check-input">
+                        </div>
+                        <h5 class="card-title">Название задачи</h5>
+                        <p class="card-text">Краткое описание задачи</p>
+                        <ul class="card-text">
+                            <li>Подзадача 1</li>
+                            <li>Подзадача 2</li>
+                            <li>Подзадача 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- / Задача не выполнена -->
+
+            <!-- Задача выполнена -->
+            <div class="col-12 col-md-6 col-lg-4" v-for=' (task, index) in tasks' :key='task.id'>
+                <div :class="{'text-light': task.checkbox , 'bg-success': task.checkbox }" class='card mb-3'>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <span class="badge text-dark bg-white mb-3">{{task.category}}</span>
+                            <input type="checkbox" class="form-check-input"  v-model='task.checkbox'>
+                        </div>
+                        <h5 class="card-title">{{task.name}}</h5>
+                        <p class="card-text">{{task.description}}</p>
+                        <ul class="card-text" v-for='item in task.subtasks'>
+                            <li>{{task.name}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- / Задача выполнена -->
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/vue.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
