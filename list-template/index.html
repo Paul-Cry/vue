@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Список</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+    <div class="container py-5">
+        <h2 class="mb-5 text-center">Список</h2>
+
+        <form class="d-flex mb-4" action="#">
+            <input type="text" class="form-control"  v-model='input.text' placeholder="Что добавим в список?">
+            <button class="btn btn-success ms-3" @click='addElement(input)'>Добавить</button>
+        </form>
+
+        <div class="list-group">
+            <message :text='input' v-for="(task, index) in mass" :text='task' :key='index' >
+                <div class="d-flex justify-content-between">
+                    <span>{{task.text}}</span>
+                    <small class="text-muted">12:00:00</small>
+                </div>
+            </message>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript" src="assets/js/vue.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+</body>
+</html>

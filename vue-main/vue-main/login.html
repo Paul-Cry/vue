@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Знакомство с Vue</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="app">
+    <div class='login' v-show='login'>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">App</a>
+
+            <div class="navbar-collapse">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html" v-model='main' value='true'>Войти</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Страница входа -->
+    <div class="container py-5" >
+        <h2 class="mb-4">Войдите</h2>
+
+        <form action="profile.html">
+            <div class="mb-3">
+                <label for="emailInput" class="form-label">Email</label>
+                <input type="email" class="form-control" id="emailInput"  v-model= 'person'>
+            </div>
+            <div class="mb-3">
+                <label for="passwordInput" class="form-label">{{person}}</label>
+                <input type="password" class="form-control" id="passwordInput">
+            </div>
+            <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+    </div>
+    <!-- / Страница входа -->
+    </div>
+
+    <div class="profil" v-show='profil'>
+        <div id="app">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">App</a>
+
+            <div class="navbar-collapse">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Выйти</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Страница входа -->
+    <div class="container py-5">
+        <h2 class="mb-4">Добро пожаловать, username!</h2>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A delectus dicta dignissimos doloremque enim eos
+            illo, ipsum labore magnam magni maxime minima nam nulla placeat quasi qui soluta suscipit, tempora ullam,
+            vero vitae voluptas voluptatem. Delectus fugiat nam necessitatibus nihil nobis optio quaerat quos tempora
+            voluptates! Ab aliquid at blanditiis commodi delectus dignissimos earum error et fugit inventore ipsam
+            laboriosam laborum magni maxime minus molestiae molestias mollitia neque non numquam obcaecati odit, omnis
+            perferendis quaerat quia quo quod ratione repellat rerum sapiente sit soluta tempora unde ut vero vitae
+            voluptate. A aspernatur debitis dolorem officiis provident quaerat vel voluptate? Amet consectetur delectus
+            deserunt est hic incidunt molestias nulla numquam provident quo? Ab accusantium dolorem dolores ducimus
+            earum eius fugiat hic, magni molestias mollitia nobis quaerat quasi quidem quis ratione repellat repudiandae
+            vero voluptatibus. Blanditiis commodi error laudantium nulla! Alias asperiores assumenda dicta dolorum, ea
+            eaque fugiat in, ipsa, neque nihil pariatur provident quo quos saepe sequi sint sit. Architecto blanditiis
+            eius eos, est eveniet, fugit id iure laudantium nihil, numquam officiis quae ratione rem sit tempora tenetur
+            voluptatibus. Consequuntur culpa dolorem impedit nostrum quisquam ratione rem! Alias aut blanditiis
+            doloribus iusto labore laudantium non officiis porro, sapiente veniam. Cum nisi omnis reiciendis sint
+            tempore? Dolorem eum ipsam nihil optio ullam. Accusamus commodi deserunt dolor id magnam possimus! Adipisci
+            dolorem itaque nam?
+        </p>
+    </div>
+    <!-- / Страница входа -->
+</div>
+    </div>
+    <div class="index" v-show='profil'>
+         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">App</a>
+
+            <div class="navbar-collapse">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Войти</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Страница входа -->
+    <div class="container py-5">
+        <h2 class="mb-4">Наши услуги</h2>
+
+        <div class="row">
+
+            <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4">
+                <div class="card">
+                    <img src="assets/images/placeholder.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Название услуги</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate dolorum id quia sequi suscipit tenetur totam ullam. Enim fugit, voluptatem.</p>
+                        <a href="#" class="btn btn-primary">Узнать подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4">
+                <div class="card">
+                    <img src="assets/images/placeholder.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Название услуги</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa ea, illo laborum necessitatibus neque nostrum obcaecati odit optio rem!</p>
+                        <a href="#" class="btn btn-primary">Узнать подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4">
+                <div class="card">
+                    <img src="assets/images/placeholder.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Название услуги</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab adipisci aliquam culpa deleniti eum id illo, incidunt ipsa neque voluptatum?</p>
+                        <a href="#" class="btn btn-primary">Узнать подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4">
+                <div class="card">
+                    <img src="assets/images/placeholder.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Название услуги</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti, dolores hic maxime non optio provident quas quasi ratione repellat reprehenderit.</p>
+                        <a href="#" class="btn btn-primary">Узнать подробнее</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    </div>
+<script type="text/javascript"  src='assets/js/vue.js'></script>
+<script type="text/javascript"  src='assets/js/main.js'></script>
+</body>
+</html>
