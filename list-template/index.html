@@ -14,16 +14,20 @@
 
         <form class="d-flex mb-4" action="#">
             <input type="text" class="form-control"  v-model='input.text' placeholder="Что добавим в список?">
-            <button class="btn btn-success ms-3" @click='addElement(input)'>Добавить</button>
+            <button class="btn btn-success ms-3" @click.prevent='addElement'>Добавить</button>
         </form>
 
         <div class="list-group">
-            <message :text='input' v-for="(task, index) in mass" :text='task' :key='index' >
-                <div class="d-flex justify-content-between">
-                    <span>{{task.text}}</span>
-                    <small class="text-muted">12:00:00</small>
-                </div>
-            </message>
+            <div class="list-group">
+
+                <a href="#" class="list-group-item list-group-item-action"  v-for="(task, index) in mass"  >
+                     <div class="d-flex justify-content-between">
+                        <input type='checkbox' @click="deleteTask(index)">
+                        <span>{{task.text}}</span>
+                        <small class="text-muted">{{task.time}}</small>
+                    </div>
+                 </a>
+        </div>
         </div>
     </div>
 </div>

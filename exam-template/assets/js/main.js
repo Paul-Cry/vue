@@ -71,7 +71,8 @@ const app = new Vue({
             date: null
         },
         editPost: null,
-        editPost_image: null
+        editPost_image: null,
+        text: null
     },
     created() {
         this.randomazer()
@@ -102,17 +103,29 @@ const app = new Vue({
         },
         addArticle() {
             const postOne = this.post
-            this.articles.push(postOne)
+            this.articles.push({
+                name: this.post.name,
+                description: this.post.description,
+                image: this.post.image,
+                date: this.post.date
+            })
             this.page = "all";
-            // this.post.image = null;
-            // this.post.name = null;
-            // this.post.description = null;
+            this.post.image = null;
+            this.post.name = null;
+            this.post.description = null;
         },
         editArticle(index){
             this.page = 'edit';
-            let word
-            this.editPost = this.articles[index]
+            this.editPost = this.articles[index];
             this.editPost_image = this.editPost.image;
+            this.articles.splice(--index, 1, 
+                {
+                name: this.editPost.name,
+                description: this.editPost.description,
+                image: this.editPost.image,
+                date: this.editPost.date
+            })
+            
         },
 
 

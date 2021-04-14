@@ -71,7 +71,7 @@
 
                         <div class="mb-3">
                             <label>Название</label>
-                            <input type="text" class="form-control" placeholder="Придумайте название статьи"  v-model:='editPost.name' :value='editPost.name'>
+                            <input type="text" class="form-control" placeholder="Придумайте название статьи"  v-model:='text' :value='editPost.name'>
                         </div>
                         <div class="mb-3">
                             <label>Описание</label>
@@ -122,7 +122,7 @@
                             <label>Изображение</label>
                             <input type="file" class="form-control" @change='addimage'>
 
-                            <img :src="post.image" class="w-100 mt-4" :alt="post.name">
+                            <img :src="post.image" class="w-100 mt-4" >
                         </div>
 
                         <button class="btn btn-success" @click='addArticle'>Сохранить</button>

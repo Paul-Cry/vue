@@ -27,23 +27,25 @@
       <div class="navbar-collapse">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" :class="{ active: page === 'index' }" @click.prevent="openPage('index')"
+            <a class="nav-link" :class="{ active: page === 'index' }" @click.prevent="getAllPosts"
                href="#">Главная</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" :class="{ active: page === 'profile' }" @click.prevent="openPage('profile')"
+            <a class="nav-link" :class="{ active: page === 'profile' }" @click.prevent="myPostsFind"
                href="#">Мой профиль</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" :class="{ active: page === 'createPost' }" @click.prevent="openPage('createPost')"
                href="#">Новый пост</a>
           </li>
-          <li class="nav-item" v-if="page !== 'profile'">
+
+          <li class="nav-item" v-if="!user">
             <a class="nav-link" :class="{ active: page === 'login' }" @click.prevent="openPage('login')"
                href="#">Войти</a>
           </li>
-          <li class="nav-item" v-if="page === 'profile'">
-            <a class="nav-link" @click.prevent="openPage('index')" href="#">Выйти</a>
+
+          <li class="nav-item" v-if="user">
+            <a class="nav-link" @click="logout" href="#">Выйти</a>
           </li>
         </ul>
       </div>
@@ -55,14 +57,14 @@
     <div v-if="page === 'index'" key="index" class="container py-5">
       <div class="row"> 
 
-        <div v-for='element in posts' class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" >
+        <div v-for='(element, index) in posts' class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" >
           <div class="card">
             <img :src="element.image" class="card-img-top" :alt="element.name">
             <div class="card-body">
               <div class="badge bg-success mb-3">{{element.user}}</div>
               <h5 class="card-title">{{element.name}}</h5>
               <p class="card-text">{{element.text}}</p>
-              <a href="#" class="btn btn-primary" @click="page = 'post'">Читать пост</a>
+              <a href="#" class="btn btn-primary" @click="showPost(index)">Читать пост</a>
             </div>
           </div>
         </div>
@@ -88,7 +90,7 @@
           <label class="form-label">Пароль</label>
           <input type="password" class="form-control" v-model='registerForm.password'>
         </div>
-        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        <button type="submit" class="btn btn-primary" @click.prevent="openPage('login')" >Зарегистрироваться</button>
         <a class="ms-3" @click.prevent="openPage('login')" href="#">Войти</a>
       </form>
     </div>
@@ -98,10 +100,10 @@
     <div v-if="page === 'login'" key="login" class="container py-5">
       <h2 class="mb-4">Войдите</h2>
 
-      <form  @submit.prevent="login()">
+      <form  @submit.prevent="login">
         <div class="mb-3">
           <label for="emailInput" class="form-label">Email</label>
-          <input v-model= 'loginForm.email' type="text" class="form-control" id="emailInput">
+          <input v-model= 'loginForm.login' type="text" class="form-control" id="emailInput">
         </div>
         <div class="mb-3">
           <label for="passwordInput" class="form-label">Пароль</label>
@@ -115,11 +117,11 @@
 
     <!-- Страница поста -->
     <div v-if="page === 'post'" key="post" class="container py-5">
-      <h2 class="mb-4">Название</h2>
+      <h2 class="mb-4">{{curentPost.name}}</h2>
 
-      <img src="" alt="">
+      <img :src="curentPost.image" alt="">
 
-      <p>Текст</p>
+      <p>{{curentPost.text}}</p>
 
       <h4 class="mt-3">Комментарии</h4>
 
@@ -148,27 +150,27 @@
     <div v-if="page === 'createPost'" key="createPost" class="container py-5">
       <h2 class="mb-4">Создание поста</h2>
 
-      <form>
+      <form @submit.prevent='createPost'>
         <div class="mb-3">
-          <label class="form-label">Название поста</label>
-          <input type="text" class="form-control">
+          <label class="form-label"  >Название поста</label>
+          <input type="text" class="form-control" v-model="postForm.name">
         </div>
-        <div class="mb-3">
-          <label class="form-label">Текст поста</label>
-          <textarea class="form-control" rows="10"></textarea>
+        <div class="mb-3"> 
+          <label class="form-label" >Текст поста</label>
+          <textarea class="form-control" rows="10" v-model= "postForm.text"></textarea>
         </div>
         <div class="mb-3">
           <label class="form-label">Изображение</label>
-          <input type="file" class="form-control">
+          <input type="file" class="form-control" @change="fileSelected">
         </div>
-        <button type="submit" class="btn btn-success mt-4">Создать пост</button>
+        <button type="submit" class="btn btn-success mt-4" @click.prevent="createPost" >Создать пост</button>
       </form>
     </div>
     <!-- / Создание поста -->
 
     <!-- Страница профиля -->
-    <div v-if="page === 'profile'" key="profile" class="container py-5">
-      <h2 class="mb-4">Добро пожаловать, username!</h2>
+    <div v-if="page === 'profile' && user" key="profile" class="container py-5">
+      <h2 class="mb-4">Добро пожаловать, {{user.username}}!</h2>
 
       <table class="table">
         <tr>
@@ -178,13 +180,13 @@
           <th>Действия</th>
         </tr>
 
-        <tr>
-          <td>1</td>
-          <td>Первый пост</td>
-          <td>дата</td>
+        <tr v-for="(element, index) in myPost" >
+          <td>{{index++}}</td>
+          <td>{{element.name}}</td>
+          <td>{{element.time}}</td>
           <td>
-            <button class="btn btn-primary">Перейти к посту</button>
-            <button class="btn btn-danger">Удалить пост</button>
+            <button class="btn btn-primary" @click='showPost(index)'>Перейти к посту</button>
+            <button class="btn btn-danger"  @click='removePost(index)'>Удалить пост</button>
           </td>
         </tr>
       </table>

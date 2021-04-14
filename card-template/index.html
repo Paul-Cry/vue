@@ -14,31 +14,14 @@
 
         <div class="row">
             <!-- Задача не выполнена -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card mb-3 text-dark bg-light">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <span class="badge bg-primary mb-3">Категория</span>
-                            <input type="checkbox" class="form-check-input">
-                        </div>
-                        <h5 class="card-title">Название задачи</h5>
-                        <p class="card-text">Краткое описание задачи</p>
-                        <ul class="card-text">
-                            <li>Подзадача 1</li>
-                            <li>Подзадача 2</li>
-                            <li>Подзадача 3</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <!-- / Задача не выполнена -->
 
             <!-- Задача выполнена -->
             <div class="col-12 col-md-6 col-lg-4" v-for=' (task, index) in tasks' :key='task.id'>
-                <div :class="{'text-light': task.checkbox , 'bg-success': task.checkbox }" class='card mb-3'>
+                <div :class="{'text-light': task.checkbox , 'bg-success': task.checkbox, 'bg-light': !task.checkbox  }" class='card mb-3'>
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <span class="badge text-dark bg-white mb-3">{{task.category}}</span>
+                            <span class="badge  mb-3" :class="{'text-dark': task.checkbox, 'bg-white': task.checkbox, 'bg-primary': !task.checkbox}">{{task.category}}</span>
                             <input type="checkbox" class="form-check-input"  v-model='task.checkbox'>
                         </div>
                         <h5 class="card-title">{{task.name}}</h5>
