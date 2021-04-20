@@ -3,8 +3,7 @@ const app = new Vue({
   el: '#app',
   data: {
     page: 'login',
-    toasts:
-     [],
+    toasts: [],
     posts: [],
     registerForm: {
       name: null,
@@ -24,8 +23,8 @@ const app = new Vue({
     },
     curentPost:null,
     user: null,
-    // myPost:  []  , 
-    myPost: [] 
+    myPost: [],
+    comments: []
   
   },
   created(){
@@ -163,6 +162,11 @@ const app = new Vue({
                 this.myPostsFind()
                 }  
     }
+  },
+  getComments(index){
+    fetch(host + '/post/comment')
+      .then(res => res.json)
+      .then(data => {this.comments = data})
   }
 }
 

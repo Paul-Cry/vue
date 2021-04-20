@@ -1,40 +1,35 @@
+Vue.component('message',{
+	props: ['text'],
+	template: `
+	 `,
+	data(){
+		return{
+			
+		}
+	}
+})
+
+
 const app = new Vue({
 	el: '#app',
 	data: {
 		input: {
 			text: null,
-			time: null,
-			date: null
-		},
-		mass: [],
-		sortMass:[]
-	},
-	
 
-	methods: {
-		addElement(){
-			this.currentime();
-			let element = {
-				text: this.input.text,
-				time: this.input.time,
-				date: this.input.date 
+		},
+		mass: [{ text:'Задача номер одни'}, {text:'Задача номер два'} ],
+		tasks: {
+				text: null
 			}
-			this.mass.push(element);
-			this.input.text = '';
-			this.sortDate()
-			console.log(this.sortMass)
+	},
+	methods: {
+		addElement(text){
+			this.mass.push(text)
 		},
 		currentime(){
-			this.input.time = new Date().getHours() + ':' + new Date().getMinutes() +':' + new Date().getSeconds();
-			this.input.date = new Date()
-		},
-		deleteTask(index){
-			this.mass.splice(index, 1);
-		},
-		sortDate(){
-			this.mass.sort((a, b) => new Date(a.date) * -1 - new Date(b.date) * -1)
+			this.hours = new Date().getHours() + ':' + new Date().getMinutes() +':' + new Date().getSeconds();
 		}
-	},
+	}
 
 
 })
